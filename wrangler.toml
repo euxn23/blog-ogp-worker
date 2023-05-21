@@ -1,6 +1,6 @@
 name = "ogp-blog-euxn-me"
-main = "src/worker.ts"
-compatibility_date = "2023-05-20"
+main = "src/index.tsx"
+compatibility_date = "2023-05-12"
 
 # # KV Namespace binding - For more information: https://developers.cloudflare.com/workers/runtime-apis/kv
 # [[kv_namespaces]]
@@ -13,10 +13,10 @@ compatibility_date = "2023-05-20"
 # class_name = "MyDurableObject"
 
 # # Bucket binding - For more information: https://developers.cloudflare.com/workers/runtime-apis/kv#bucket
-# [[buckets]]
-# binding = "MY_BUCKET"
-# name = "my-bucket"
-# bucket_id = "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+[[r2_buckets]]
+binding = "OGP_BLOG_EUXN_ME"
+bucket_name = "ogp-blog-euxn-me"
+preview_bucket_name = "ogp-blog-euxn-me"
 
 # # Service binding - For more information: https://developers.cloudflare.com/workers/platform/services
 # [[routes]]
