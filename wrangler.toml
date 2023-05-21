@@ -38,3 +38,7 @@ preview_bucket_name = "ogp-blog-euxn-me"
 
 # [env.shared]
 # SHARED_VARIABLE = "shared_value"
+
+[placement]
+mode = "smart"
+
