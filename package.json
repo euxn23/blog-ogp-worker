@@ -1,9 +1,9 @@
 {
-  "name": "ogp-blog-euxn-me",
-  "version": "0.0.0",
+  "name": "ogp.worker.blog.euxn.me",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "deploy": "wrangler publish",
+    "deploy": "wrangler deploy",
     "start": "wrangler dev"
   },
   "devDependencies": {
