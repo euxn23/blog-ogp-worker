@@ -22,6 +22,9 @@ export default {
     if (!title) {
       return new Response('Parameter not definer: title')
     }
+    if (title.includes('/')) {
+      return new Response('Bad parameter: title', { status: 400 })
+    }
 
     const cache = await fetch(`https://ogp.blog.euxn.me/cache/${title}.png`, { method: 'HEAD' });
     if (cache.status === 200) {
