@@ -23,14 +23,9 @@ export default {
       return new Response('Parameter not definer: title')
     }
 
-    const cache = await env.OGP_BLOG_EUXN_ME.get(`cache/${title}.png`);
-    if (cache) {
-      return new Response(cache.body, {
-        headers: {
-          'Cache-Status': '"Cloudflare R2"; hit',
-          'Content-Type': 'image/png'
-        }
-      })
+    const cache = await fetch(`https://ogp.blog.euxn.me/cache/${title}.png`, { method: 'HEAD' });
+    if (cache.status === 200) {
+      return Response.redirect(`https://ogp.blog.euxn.me/cache/${title}.png`, 301)
     }
 
     if (!fontCache) {
