@@ -9,7 +9,10 @@ init(await initYoga(yogaWasm as WebAssembly.Module));
 await initWasm(resvgWasm);
 
 type ENV = {
-  OGP_BLOG_EUXN_ME: R2Bucket
+  R2: R2Bucket
+  SITE_TITLE: string
+  SITE_THEME: 'dark' | 'light'
+  CACHE_ENDPOINT: string
 }
 
 let fontCache: null | ArrayBuffer = null;
@@ -28,7 +31,7 @@ export default {
 
     const isTwitterBot = request.headers.get('user-agent')?.includes('Twitterbot') ?? false;
     if (isTwitterBot) {
-      const cache = await env.OGP_BLOG_EUXN_ME.get(`cache/${title}.png`);
+      const cache = await env.R2.get(`cache/${title}.png`);
       if (cache) {
         return new Response(cache.body, {
           headers: {
@@ -39,13 +42,13 @@ export default {
       }
     }
 
-    const cache = await fetch(`https://ogp.blog.euxn.me/cache/${title}.png`, { method: 'HEAD' });
+    const cache = await fetch(`${env.CACHE_ENDPOINT}/${title}.png`, { method: 'HEAD' });
     if (cache.status === 200) {
-      return Response.redirect(`https://ogp.blog.euxn.me/cache/${title}.png`, 301)
+      return Response.redirect(`${env.CACHE_ENDPOINT}/${title}.png`, 301)
     }
 
     if (!fontCache) {
-      const fontObject = await env.OGP_BLOG_EUXN_ME.get(
+      const fontObject = await env.R2.get(
         'fonts/NotoSansJP-Regular.ttf'
       );
 
@@ -69,7 +72,7 @@ export default {
       }
     }
 
-    const svg = await satori(<Preview text={title}/>, {
+    const svg = await satori(<Preview siteTitle={env.SITE_TITLE} text={title} theme={env.SITE_THEME}/>, {
       width: 1200,
       height: 630,
       fonts: [
@@ -86,7 +89,7 @@ export default {
       .render()
       .asPng();
 
-    await env.OGP_BLOG_EUXN_ME.put(`cache/${title}.png`, image)
+    await env.R2.put(`cache/${title}.png`, image)
 
     return new Response(image, {
       headers: {

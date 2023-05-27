@@ -1,4 +1,4 @@
-name = "ogp-blog-euxn-me"
+name = "ogp-diary-euxn-me"
 main = "src/index.tsx"
 compatibility_date = "2023-05-12"
 
@@ -15,8 +15,8 @@ compatibility_date = "2023-05-12"
 # # Bucket binding - For more information: https://developers.cloudflare.com/workers/runtime-apis/kv#bucket
 [[r2_buckets]]
 binding = "R2"
-bucket_name = "ogp-blog-euxn-me"
-preview_bucket_name = "ogp-blog-euxn-me"
+bucket_name = "ogp-diary-euxn-me"
+preview_bucket_name = "ogp-diary-euxn-me"
 
 # # Service binding - For more information: https://developers.cloudflare.com/workers/platform/services
 # [[routes]]
@@ -40,9 +40,9 @@ preview_bucket_name = "ogp-blog-euxn-me"
 # SHARED_VARIABLE = "shared_value"
 
 [vars]
-SITE_TITLE = 'blog.euxn.me'
-SITE_THEME = 'dark'
-CACHE_ENDPOINT = 'https://ogp.blog.euxn.me/cache'
+SITE_TITLE = 'diary.euxn.me'
+SITE_THEME = 'light'
+CACHE_ENDPOINT = 'https://ogp.diary.euxn.me/cache'
 
 [placement]
 mode = "smart"

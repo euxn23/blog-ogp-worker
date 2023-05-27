@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "deploy": "wrangler deploy",
+    "deploy:diary": "wrangler deploy -c wrangler.diary.toml",
     "start": "wrangler dev"
   },
   "devDependencies": {
